@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luis D. Hernández | Estadístico & M.Sc. (c) en Estadística</title>
+  <meta name="description" content="Portafolio profesional y académico de Luis D. Hernández — Estadístico y Estudiante de Maestría en Ciencias - Estadística en la Universidad Nacional de Colombia. Ciencia de Datos, Machine Learning, Bioestadística y Modelado Estadístico." />
+  <meta name="author" content="Luis D. Hernández" />
+  <meta property="og:title" content="Luis D. Hernández | Estadístico & Data Scientist" />
+  <meta property="og:description" content="Modelado estadístico, Machine Learning, Bioestadística e Ingeniería de IA. Universidad Nacional de Colombia." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://luhernandezp.github.io" />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/136203595?v=4" />
+
+  <!-- Google Fonts: Inter, Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b0f19'/><path d='M15 75 Q 35 75 42 40 Q 50 5 58 40 Q 65 75 85 75' stroke='%2338bdf8' stroke-width='8' fill='none' stroke-linecap='round'/><circle cx='50' cy='22' r='6' fill='%23a855f7'/></svg>" />
+</head>
+<body>
+  <!-- Ambient Background Canvas & Glows -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <!-- Top Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#inicio" class="brand" aria-label="Inicio">
+        <span class="brand-symbol">&Sigma;</span>
+        <span class="brand-text">Luis D. Hernández<span class="brand-dot">.</span></span>
+      </a>
+
+      <nav class="nav-links" id="nav-links" aria-label="Navegación principal">
+        <a href="#sobre-mi" class="nav-link" data-i18n="nav.about">Perfil</a>
+        <a href="#proyectos" class="nav-link" data-i18n="nav.projects">Proyectos</a>
+        <a href="#investigacion" class="nav-link" data-i18n="nav.research">Investigación &amp; Maestría</a>
+        <a href="#stack" class="nav-link" data-i18n="nav.stack">Stack Técnico</a>
+        <a href="#laboratorio" class="nav-link" data-i18n="nav.lab">Simulador</a>
+        <a href="#contacto" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn lang-btn" id="lang-toggle" title="Cambiar idioma (ES / EN)" aria-label="Cambiar idioma">
+          <span class="mono-tag" id="lang-label">ES</span>
+        </button>
+        <button class="icon-btn theme-btn" id="theme-toggle" title="Cambiar tema claro/oscuro" aria-label="Cambiar tema">
+          <!-- Sun icon -->
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <!-- Moon icon -->
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <a href="https://github.com/luhernandezp" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <span>GitHub</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span data-i18n="hero.badge">Estadístico &bull; M.Sc. (c) en Estadística — UNAL Medellín</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span data-i18n="hero.greeting">Hola, soy</span> <span class="gradient-text">Luis D. Hernández</span>
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
+            Transformo incertidumbre y datos complejos en decisiones rigurosas mediante <strong>inferencia estadística</strong>, <strong>aprendizaje automático</strong> y <strong>modelos matemáticos</strong> reproducibles.
+          </p>
+
+          <div class="hero-Equation-bar mono-tag">
+            <span>P(&theta; | D) &propto; P(D | &theta;) &middot; P(&theta;)</span>
+            <span class="sep">|</span>
+            <span>E[Y | X] = f(X; &beta;)</span>
+            <span class="sep">|</span>
+            <span>S(t) = P(T &gt; t)</span>
+          </div>
+
+          <div class="hero-cta">
+            <a href="#proyectos" class="btn btn-primary">
+              <span data-i18n="hero.cta_projects">Explorar Proyectos</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#contacto" class="btn btn-secondary" data-i18n="hero.cta_contact">Contactar</a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-value">UNAL</span>
+              <span class="metric-label" data-i18n="hero.metric1">Pregrado &amp; Posgrado en Estadística</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-value">R &bull; Python</span>
+              <span class="metric-label" data-i18n="hero.metric2">Modelado, Quarto, PyTorch &amp; FastAPI</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-value" id="repo-count-metric">6+</span>
+              <span class="metric-label" data-i18n="hero.metric3">Repositorios Públicos de Ciencia de Datos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile & Interactive Mini-Distribution Card -->
+        <div class="hero-visual">
+          <div class="profile-card glass-card">
+            <div class="profile-header">
+              <img src="https://avatars.githubusercontent.com/u/136203595?v=4" alt="Foto de perfil de Luis D. Hernández" class="avatar-img" />
+              <div class="profile-meta">
+                <h2>Luis D. Hernández</h2>
+                <p class="mono-text">@luhernandezp</p>
+                <div class="location-tag">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span>Medellín, Colombia</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Canvas: Gaussian Process / Bayesian Posterior Preview -->
+            <div class="mini-viz-box">
+              <div class="mini-viz-header">
+                <span class="mono-tag" data-i18n="hero.viz_title">Inferencia en Tiempo Real: f(x | D)</span>
+                <span class="live-indicator"><span class="pulse-dot"></span> interactivo</span>
+              </div>
+              <canvas id="heroChart" width="420" height="175" aria-label="Visualización estadística interactiva"></canvas>
+              <div class="mini-viz-footer">
+                <span class="mono-xs" data-i18n="hero.viz_hint">Mueve el cursor sobre la curva para inspeccionar intervalos de credibilidad (95% CI)</span>
+              </div>
+            </div>
+
+            <div class="profile-tags">
+              <span class="chip">Estadística Multivariada</span>
+              <span class="chip">Análisis de Supervivencia</span>
+              <span class="chip">Machine Learning</span>
+              <span class="chip">Deep Learning</span>
+              <span class="chip">NLP &amp; LLMs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / PERFIL SECTION -->
+    <section class="section" id="sobre-mi">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker mono-tag">01 // PERFIL PROFESIONAL &amp; ACADÉMICO</span>
+          <h2 class="section-title" data-i18n="about.title">Rigor matemático aplicado a problemas reales</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text glass-card">
+            <p data-i18n="about.p1">
+              Soy <strong>Estadístico</strong> y actualmente curso la <strong>Maestría en Ciencias - Estadística</strong> en la <strong>Universidad Nacional de Colombia (Sede Medellín)</strong>. Mi formación combina una base sólida en teoría de la probabilidad, inferencia estadística y álgebra lineal numérica con el desarrollo moderno de soluciones de Ciencia de Datos e Inteligencia Artificial.
+            </p>
+            <p data-i18n="about.p2">
+              Me especializo en diseñar flujos analíticos completos y reproducibles: desde el diseño experimental, limpieza de datos e inferencia clásica/bayesiana en <strong>R y Quarto</strong>, hasta el entrenamiento de modelos de aprendizaje profundo (<em>Sparse Transformers</em>, factorización matricial) y el despliegue de servicios de evaluación automatizada en producción con <strong>Python, FastAPI y Docker</strong>.
+            </p>
+
+            <div class="pillars-grid">
+              <div class="pillar-item">
+                <div class="pillar-icon">📊</div>
+                <div>
+                  <h3 data-i18n="about.pillar1_title">Modelado Estadístico &amp; Consultoría</h3>
+                  <p data-i18n="about.pillar1_desc">Modelos lineales generalizados (GLM), análisis de supervivencia (Kaplan-Meier, Cox, modelos paramétricos), estadística multivariada y bioestadística clínica.</p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <div class="pillar-icon">🧠</div>
+                <div>
+                  <h3 data-i18n="about.pillar2_title">Machine Learning &amp; Deep Learning</h3>
+                  <p data-i18n="about.pillar2_desc">Modelos predictivos supervisados y no supervisados, redes neuronales, mecanismos de atención dispersa (Sparse Attention) y aproximación de rango bajo.</p>
+                </div>
+              </div>
+              <div class="pillar-item">
+                <div class="pillar-icon">⚙️</div>
+                <div>
+                  <h3 data-i18n="about.pillar3_title">Ciencia de Datos Reproducible &amp; IA</h3>
+                  <p data-i18n="about.pillar3_desc">Reportes científicos automatizados en Quarto/LaTeX, validación rigurosa con métricas de precisión/F1 y arquitecturas híbridas (reglas determinísticas + LLMs).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="education-card glass-card">
+            <h3 class="card-subtitle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span data-i18n="about.edu_title">Trayectoria Académica</span>
+            </h3>
+
+            <div class="timeline">
+              <div class="timeline-item active">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date mono-tag" data-i18n="about.edu1_date">En curso &bull; Posgrado</span>
+                  <h4 data-i18n="about.edu1_degree">Maestría en Ciencias - Estadística</h4>
+                  <p class="timeline-inst">Universidad Nacional de Colombia — Sede Medellín</p>
+                  <p class="timeline-desc" data-i18n="about.edu1_desc">
+                    Profundización en Aprendizaje Automático avanzado, Métodos Multivariados, Modelos Estadísticos y Computación Científica.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date mono-tag" data-i18n="about.edu2_date">Pregrado Universitario</span>
+                  <h4 data-i18n="about.edu2_degree">Estadístico</h4>
+                  <p class="timeline-inst">Universidad Nacional de Colombia — Sede Medellín</p>
+                  <p class="timeline-desc" data-i18n="about.edu2_desc">
+                    Formación rigurosa en inferencia estadística, probabilidad, muestreo, diseño de experimentos, regresión, series de tiempo y consultoría estadística aplicada.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" id="proyectos">
+      <div class="container">
+        <div class="section-header-row">
+          <div>
+            <span class="section-kicker mono-tag">02 // PORTAFOLIO &amp; REPOSITORIOS</span>
+            <h2 class="section-title" data-i18n="projects.title">Proyectos Destacados de Estadística &amp; Data Science</h2>
+          </div>
+
+          <!-- Filter Buttons -->
+          <div class="filter-group" role="tablist" aria-label="Filtrar proyectos por categoría">
+            <button class="filter-btn active" data-filter="all" data-i18n="projects.filter_all">Todos</button>
+            <button class="filter-btn" data-filter="estadistica" data-i18n="projects.filter_stats">Estadística &amp; R</button>
+            <button class="filter-btn" data-filter="ml" data-i18n="projects.filter_ml">Machine Learning &amp; DL</button>
+            <button class="filter-btn" data-filter="ingenieria" data-i18n="projects.filter_eng">IA &amp; Producción</button>
+          </div>
+        </div>
+
+        <div class="projects-grid" id="projects-grid">
+          <!-- Project 1: Vozy Quality Evaluator -->
+          <article class="project-card glass-card" data-category="ingenieria ml">
+            <div class="project-top">
+              <div class="project-type-badge badge-python">Python &bull; FastAPI &bull; LLM Evaluation</div>
+              <div class="project-links">
+                <a href="https://vozy-quality-evaluator.onrender.com" target="_blank" rel="noopener noreferrer" class="icon-link" title="Ver Demo en Vivo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+                <a href="https://github.com/luhernandezp/vozy-quality-evaluator" target="_blank" rel="noopener noreferrer" class="icon-link" title="Ver código en GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="project-title">Vozy Quality Evaluator — Evaluación Híbrida de Agentes de Voz</h3>
+            <p class="project-desc" data-i18n="projects.p1_desc">
+              Servicio en producción que audita transcripciones de llamadas de cobranza contra una rúbrica de 10 criterios de negocio. Combina validadores determinísticos en español con evaluación por LLMs (Gemini, Groq, OpenRouter), logrando un análisis riguroso de precisión, sensibilidad, F1 y costo por lote.
+            </p>
+
+            <div class="project-highlights mono-xs">
+              <span>&check; 126 pruebas unitarias (Pytest)</span>
+              <span>&check; API REST + Panel interactivo</span>
+            </div>
+
+            <div class="project-footer">
+              <div class="tech-stack-mini">
+                <span>Python</span>
+                <span>FastAPI</span>
+                <span>Pydantic v2</span>
+                <span>NLP</span>
+                <span>Docker</span>
+              </div>
+              <a href="https://github.com/luhernandezp/vozy-quality-evaluator" target="_blank" rel="noopener noreferrer" class="project-cta-link">
+                <span data-i18n="projects.view_repo">Repositorio</span> &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 2: Sparse Transformer & Matrix Factorization -->
+          <article class="project-card glass-card" data-category="ml estadistica">
+            <div class="project-top">
+              <div class="project-type-badge badge-dl">Deep Learning &bull; Álgebra Matricial</div>
+              <div class="project-links">
+                <a href="https://github.com/luhernandezp/Sparse-Transformer-And-Matrix-Factorization" target="_blank" rel="noopener noreferrer" class="icon-link" title="Ver código en GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="project-title">Sparse Transformer &amp; Matrix Factorization</h3>
+            <p class="project-desc" data-i18n="projects.p2_desc">
+              Estudio e implementación experimental de mecanismos de <em>Sparse Attention</em> y factorización de matrices para reducir la complejidad cuadrática O(N²) de la autoatención en arquitecturas Transformer, evaluando el compromiso entre eficiencia computacional y capacidad de representación.
+            </p>
+
+            <div class="project-highlights mono-xs">
+              <span>&check; Reducción de complejidad O(N&radic;N)</span>
+              <span>&check; Aproximación de rango bajo</span>
+            </div>
+
+            <div class="project-footer">
+              <div class="tech-stack-mini">
+                <span>Jupyter</span>
+                <span>Python</span>
+                <span>PyTorch</span>
+                <span>SVD / Low-Rank</span>
+              </div>
+              <a href="https://github.com/luhernandezp/Sparse-Transformer-And-Matrix-Factorization" target="_blank" rel="noopener noreferrer" class="project-cta-link">
+                <span data-i18n="projects.view_repo">Notebook</span> &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 3: Proyecto Consultoría Bioestadística PD-L1 -->
+          <article class="project-card glass-card" data-category="estadistica">
+            <div class="project-top">
+              <div class="project-type-badge badge-r">Bioestadística &bull; Supervivencia</div>
+              <div class="project-links">
+                <a href="https://github.com/luhernandezp/Proyecto_consultoria" target="_blank" rel="noopener noreferrer" class="icon-link" title="Ver código en GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="project-title">Consultoría Estadística: Supervivencia &amp; Biomarcador PD-L1</h3>
+            <p class="project-desc" data-i18n="projects.p3_desc">
+              Análisis bioestadístico integral de cohortes clínicas (expresión de PD-L1 y estado vital a 5 años). Incluye estimación de curvas de Kaplan-Meier, pruebas Log-Rank, regresión de riesgos proporcionales de Cox y modelos paramétricos de supervivencia (<code>survival</code>, <code>flexsurv</code>, <code>survminer</code>).
+            </p>
+
+            <div class="project-highlights mono-xs">
+              <span>&check; Informes reproducibles en Quarto (.qmd)</span>
+              <span>&check; Selección de variables clínicas</span>
+            </div>
+
+            <div class="project-footer">
+              <div class="tech-stack-mini">
+                <span>R</span>
+                <span>Quarto</span>
+                <span>survival</span>
+                <span>survminer</span>
+                <span>ggplot2</span>
+              </div>
+              <a href="https://github.com/luhernandezp/Proyecto_consultoria" target="_blank" rel="noopener noreferrer" class="project-cta-link">
+                <span data-i18n="projects.view_repo">Repositorio</span> &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 4: Aprendizaje Automático (Maestría UNAL) -->
+          <article class="project-card glass-card" data-category="ml estadistica">
+            <div class="project-top">
+              <div class="project-type-badge badge-ml">Maestría UNAL &bull; Machine Learning</div>
+              <div class="project-links">
+                <a href="https://github.com/luhernandezp/Aprendizaje_automatico-ML" target="_blank" rel="noopener noreferrer" class="icon-link" title="Ver código en GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="project-title">Aprendizaje Automático &amp; Fundamentos de Redes Neuronales</h3>
+            <p class="project-desc" data-i18n="projects.p4_desc">
+              Desarrollo práctico y teórico del posgrado en Ciencias-Estadística (UNAL Medellín). Aborda modelado avanzado de regresión, regularización, validación cruzada, optimización por descenso de gradiente y fundamentos matemáticos de redes neuronales artificiales.
+            </p>
+
+            <div class="project-highlights mono-xs">
+              <span>&check; Posgrado en Estadística 2026</span>
+              <span>&check; Notebooks y reportes técnicos</span>
+            </div>
+
+            <div class="project-footer">
+              <div class="tech-stack-mini">
+                <span>Jupyter</span>
+                <span>Python</span>
+                <span>Scikit-Learn</span>
+                <span>Redes Neuronales</span>
+              </div>
+              <a href="https://github.com/luhernandezp/Aprendizaje_automatico-ML" target="_blank" rel="noopener noreferrer" class="project-cta-link">
+                <span data-i18n="projects.view_repo">Repositorio</span> &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 5: Ciencia de Datos - Prueba Técnica Reproducible -->
+          <article class="project-card glass-card" data-category="estadistica ml">
+            <div class="project-top">
+              <div class="project-type-badge badge-r">Data Science &bull; R &amp; Quarto</div>
+              <div class="project-links">
+                <a href="https://github.com/luhernandezp/Data_Science" target="_blank" rel="noopener noreferrer" class="icon-link" title="Ver código en GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="project-title">Caso Técnico de Ciencia de Datos End-to-End</h3>
+            <p class="project-desc" data-i18n="projects.p5_desc">
+              Resolución integral de caso aplicado para Ciencia de Datos: exploración estadística (EDA), ingeniería de características, ajuste y diagnóstico de modelos, y generación de informe ejecutivo reproducible en PDF/HTML mediante Quarto y scripts modulares en R.
+            </p>
+
+            <div class="project-highlights mono-xs">
+              <span>&check; Flujo 100% reproducible (.qmd + .R)</span>
+              <span>&check; Interpretabilidad ejecutiva</span>
+            </div>
+
+            <div class="project-footer">
+              <div class="tech-stack-mini">
+                <span>R</span>
+                <span>Tidyverse</span>
+                <span>Quarto</span>
+                <span>Modelado Predictivo</span>
+              </div>
+              <a href="https://github.com/luhernandezp/Data_Science" target="_blank" rel="noopener noreferrer" class="project-cta-link">
+                <span data-i18n="projects.view_repo">Repositorio</span> &rarr;
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 6: Análisis Multivariado -->
+          <article class="project-card glass-card" data-category="estadistica">
+            <div class="project-top">
+              <div class="project-type-badge badge-r">Estadística Multivariada &bull; R</div>
+              <div class="project-links">
+                <a href="https://github.com/luhernandezp/Analisis_Multivariado" target="_blank" rel="noopener noreferrer" class="icon-link" title="Ver código en GitHub">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="project-title">Métodos de Análisis Estadístico Multivariado</h3>
+            <p class="project-desc" data-i18n="projects.p6_desc">
+              Implementación de técnicas de reducción de dimensionalidad y estructura de covarianza: Análisis de Componentes Principales (PCA), Análisis Factorial, MANOVA, Análisis Discriminante y métodos de agrupamiento (Clustering) con inferencia sobre vectores de medias.
+            </p>
+
+            <div class="project-highlights mono-xs">
+              <span>&check; Inferencia en alta dimensión</span>
+              <span>&check; Visualización multivariante en R</span>
+            </div>
+
+            <div class="project-footer">
+              <div class="tech-stack-mini">
+                <span>R</span>
+                <span>PCA / Factorial</span>
+                <span>MANOVA</span>
+                <span>Clustering</span>
+              </div>
+              <a href="https://github.com/luhernandezp/Analisis_Multivariado" target="_blank" rel="noopener noreferrer" class="project-cta-link">
+                <span data-i18n="projects.view_repo">Repositorio</span> &rarr;
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH & MASTER'S FOCUS SECTION -->
+    <section class="section" id="investigacion">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker mono-tag">03 // INVESTIGACIÓN &amp; LÍNEAS DE ESTUDIO</span>
+          <h2 class="section-title" data-i18n="research.title">Enfoque en la Maestría en Estadística</h2>
+          <p class="section-subtitle" data-i18n="research.subtitle">
+            Áreas de investigación, modelado matemático y producción académica desarrolladas durante mi formación de posgrado en la Universidad Nacional de Colombia.
+          </p>
+        </div>
+
+        <div class="research-grid">
+          <div class="research-card glass-card">
+            <div class="research-number mono-tag">LÍNEA 01</div>
+            <h3 data-i18n="research.r1_title">Aprendizaje Estadístico &amp; arquitecturas eficientes</h3>
+            <p data-i18n="research.r1_desc">
+              Exploración de la intersección entre el álgebra lineal numérica y el aprendizaje profundo: aproximaciones de bajo rango, factorización matricial y mecanismos de atención dispersa (<em>Sparse Attention</em>) para escalar modelos secuenciales y de alta dimensión.
+            </p>
+            <div class="equation-pill mono-xs">
+              Attn(Q, K, V) = softmax(Q K<sup>T</sup> / &radic;d<sub>k</sub>) V &approx; LowRank(Q, K)V
+            </div>
+          </div>
+
+          <div class="research-card glass-card">
+            <div class="research-number mono-tag">LÍNEA 02</div>
+            <h3 data-i18n="research.r2_title">Análisis de Supervivencia &amp; Bioestadística Aplicada</h3>
+            <p data-i18n="research.r2_desc">
+              Modelado de tiempos hasta el evento con censura por derecha en estudios clínicos y oncológicos (como biomarcadores PD-L1). Evaluación de riesgos proporcionales, distribuciones Weibull/Log-Normal e identificación de factores pronósticos.
+            </p>
+            <div class="equation-pill mono-xs">
+              h(t | X) = h<sub>0</sub>(t) exp(&beta;<sup>T</sup> X)
+            </div>
+          </div>
+
+          <div class="research-card glass-card">
+            <div class="research-number mono-tag">LÍNEA 03</div>
+            <h3 data-i18n="research.r3_title">Evaluación Estadística de Sistemas de IA &amp; LLMs</h3>
+            <p data-i18n="research.r3_desc">
+              Diseño de rúbricas cuantitativas, medición de concordancia y estimación de tasas de error (Precisión, Sensibilidad, F1-score, reproducibilidad estocástica) en arquitecturas híbridas que integran reglas determinísticas y modelos de lenguaje.
+            </p>
+            <div class="equation-pill mono-xs">
+              F<sub>1</sub> = 2 &middot; (Precisión &middot; Sensibilidad) / (Precisión + Sensibilidad)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL STACK SECTION -->
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker mono-tag">04 // HABILIDADES &amp; HERRAMIENTAS</span>
+          <h2 class="section-title" data-i18n="stack.title">Stack Técnico de Estadística &amp; Ciencia de Datos</h2>
+        </div>
+
+        <div class="stack-grid">
+          <!-- R Ecosystem -->
+          <div class="stack-card glass-card">
+            <div class="stack-card-header">
+              <span class="stack-badge badge-r">R</span>
+              <h3 data-i18n="stack.c1_title">Ecosistema R &amp; Computación Estadística</h3>
+            </div>
+            <p class="stack-card-desc" data-i18n="stack.c1_desc">Análisis inferencial, bioestadística, visualización científica y reportería reproducible.</p>
+            <div class="skill-tags">
+              <span>Tidyverse (dplyr, ggplot2)</span>
+              <span>Quarto / RMarkdown</span>
+              <span>survival &amp; survminer</span>
+              <span>flexsurv</span>
+              <span>actuar</span>
+              <span>lme4 / nlme</span>
+              <span>caret / tidymodels</span>
+              <span>knitr &amp; kableExtra</span>
+              <span>Shiny</span>
+            </div>
+          </div>
+
+          <!-- Python & ML -->
+          <div class="stack-card glass-card">
+            <div class="stack-card-header">
+              <span class="stack-badge badge-python">Py</span>
+              <h3 data-i18n="stack.c2_title">Python, Machine Learning &amp; Deep Learning</h3>
+            </div>
+            <p class="stack-card-desc" data-i18n="stack.c2_desc">Modelado predictivo, redes neuronales, procesamiento de lenguaje natural y evaluación de modelos.</p>
+            <div class="skill-tags">
+              <span>NumPy &amp; SciPy</span>
+              <span>Pandas / Polars</span>
+              <span>Scikit-Learn</span>
+              <span>Statsmodels</span>
+              <span>PyTorch</span>
+              <span>Jupyter Notebooks</span>
+              <span>Matplotlib &amp; Seaborn</span>
+              <span>LLM APIs (Gemini / Groq)</span>
+            </div>
+          </div>
+
+          <!-- Statistical Methods -->
+          <div class="stack-card glass-card">
+            <div class="stack-card-header">
+              <span class="stack-badge badge-dl">&Sigma;</span>
+              <h3 data-i18n="stack.c3_title">Metodologías Estadísticas &amp; Matemáticas</h3>
+            </div>
+            <p class="stack-card-desc" data-i18n="stack.c3_desc">Fundamentación teórica y aplicada para la toma de decisiones bajo incertidumbre.</p>
+            <div class="skill-tags">
+              <span>Inferencia Clásica &amp; Bayesiana</span>
+              <span>Modelos Lineales Generalizados (GLM)</span>
+              <span>Análisis Multivariado (PCA, FA, MANOVA)</span>
+              <span>Análisis de Supervivencia</span>
+              <span>Series de Tiempo</span>
+              <span>Diseño de Experimentos &amp; Muestreo</span>
+              <span>Factorización Matricial &amp; SVD</span>
+            </div>
+          </div>
+
+          <!-- Data Engineering & Reproducibility -->
+          <div class="stack-card glass-card">
+            <div class="stack-card-header">
+              <span class="stack-badge badge-ml">Ops</span>
+              <h3 data-i18n="stack.c4_title">Ingeniería de Datos, Bases de Datos &amp; Despliegue</h3>
+            </div>
+            <p class="stack-card-desc" data-i18n="stack.c4_desc">Puesta en producción de modelos, control de versiones y documentación científica.</p>
+            <div class="skill-tags">
+              <span>SQL &amp; BigQuery</span>
+              <span>FastAPI &amp; Pydantic</span>
+              <span>Git &amp; GitHub</span>
+              <span>Docker</span>
+              <span>LaTeX / BibTeX</span>
+              <span>Pytest</span>
+              <span>Linux / Terminal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE STATISTICAL SIMULATOR SECTION -->
+    <section class="section" id="laboratorio">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker mono-tag">05 // LABORATORIO INTERACTIVO</span>
+          <h2 class="section-title" data-i18n="lab.title">Simulador de Inferencia Bayesiana &amp; Regresión</h2>
+          <p class="section-subtitle" data-i18n="lab.subtitle">
+            Un pequeño módulo interactivo en el navegador: ajusta el tamaño muestral (<em>n</em>) y el nivel de ruido (&sigma;) para observar cómo converge el estimador de mínimos cuadrados / posterior bayesiano hacia la función verdadera.
+          </p>
+        </div>
+
+        <div class="lab-container glass-card">
+          <div class="lab-controls">
+            <div class="control-group">
+              <label for="sample-size-slider">
+                <span data-i18n="lab.sample_size">Tamaño de muestra (n):</span>
+                <strong class="mono-tag" id="sample-size-val">45</strong>
+              </label>
+              <input type="range" id="sample-size-slider" min="10" max="150" value="45" step="5" />
+            </div>
+
+            <div class="control-group">
+              <label for="noise-slider">
+                <span data-i18n="lab.noise_level">Desviación del error (&sigma;):</span>
+                <strong class="mono-tag" id="noise-val">0.80</strong>
+              </label>
+              <input type="range" id="noise-slider" min="0.2" max="2.5" value="0.8" step="0.1" />
+            </div>
+
+            <button class="btn btn-primary btn-sm" id="resimulate-btn" data-i18n="lab.simulate_btn">
+              Generar Nueva Muestra Aleatoria
+            </button>
+
+            <div class="lab-stats-box">
+              <div class="lab-stat">
+                <span class="mono-xs">Modelo Verdadero:</span>
+                <span class="mono-tag">Y = 1.5 + 2.2X + &epsilon;</span>
+              </div>
+              <div class="lab-stat">
+                <span class="mono-xs">Estimación OLS ($\hat{\beta}_0, \hat{\beta}_1$):</span>
+                <span class="mono-tag highlight-cyan" id="ols-estimates">&beta;&#770;₀ = 1.48, &beta;&#770;₁ = 2.19</span>
+              </div>
+              <div class="lab-stat">
+                <span class="mono-xs">Bondad de Ajuste ($R^2$):</span>
+                <span class="mono-tag highlight-purple" id="r2-value">R² = 0.864</span>
+              </div>
+              <div class="lab-stat">
+                <span class="mono-xs">Error Estándar ($\text{SE}(\hat{\beta}_1)$):</span>
+                <span class="mono-tag" id="se-value">SE = 0.132</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lab-canvas-wrapper">
+            <canvas id="regressionCanvas" width="680" height="340" aria-label="Gráfico de simulación de regresión lineal con banda de confianza"></canvas>
+            <div class="canvas-legend mono-xs">
+              <span><i class="legend-dot dot-true"></i> Recta poblacional E[Y|X]</span>
+              <span><i class="legend-dot dot-est"></i> Recta estimada &beta;&#770;</span>
+              <span><i class="legend-dot dot-ci"></i> Banda de confianza 95%</span>
+              <span><i class="legend-dot dot-obs"></i> Observaciones (x<sub>i</sub>, y<sub>i</sub>)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="contact-box glass-card">
+          <div class="contact-content">
+            <span class="section-kicker mono-tag">06 // CONTACTO &amp; COLABORACIÓN</span>
+            <h2 class="section-title" data-i18n="contact.title">¿Hablamos sobre datos, estadística o investigación?</h2>
+            <p class="contact-desc" data-i18n="contact.desc">
+              Estoy abierto a oportunidades en <strong>Ciencia de Datos</strong>, <strong>Modelado Estadístico</strong>, <strong>Consultoría Bioestadística / Analítica</strong> y colaboraciones académicas o de investigación.
+            </p>
+
+            <div class="contact-methods">
+              <a href="mailto:luhernandezp@unal.edu.co" class="contact-pill">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span>luhernandezp@unal.edu.co</span>
+              </a>
+
+              <a href="https://github.com/luhernandezp" target="_blank" rel="noopener noreferrer" class="contact-pill">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                <span>github.com/luhernandezp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="brand-symbol">&Sigma;</span>
+        <span>&copy; 2026 <strong>Luis D. Hernández</strong> &mdash; Estadístico &bull; UNAL Medellín</span>
+      </div>
+      <div class="footer-right mono-xs">
+        <span>Alojado en <a href="https://luhernandezp.github.io">luhernandezp.github.io</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
