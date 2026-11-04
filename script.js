@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const next = current === 'light' ? 'dark' : 'light';
       htmlEl.setAttribute('data-theme', next);
       localStorage.setItem('ldh-minimal-theme', next);
-      drawRegressionPlot();
     });
   }
 
@@ -27,7 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
       'nav.research': 'Investigación',
       'nav.stack': 'Habilidades',
       'nav.contact': 'Contacto',
+      'nav.dark': 'Oscuro',
+      'nav.light': 'Claro',
       'sidebar.focus': 'Áreas de Énfasis',
+      'sidebar.f1': 'Inferencia Causal en Series de Tiempo',
+      'sidebar.f2': 'Inferencia Estadística',
+      'sidebar.f3': 'Machine Learning & DL',
+      'sidebar.f4': 'Análisis de Supervivencia',
+      'sidebar.f5': 'Estadística Multivariada',
+      'sidebar.f6': 'Modelado en R & Python',
       'hero.badge': 'Estadístico · M.Sc. (c) en Estadística',
       'about.heading': '01 // SOBRE MÍ & FORMACIÓN',
       'about.title': 'Estadística Aplicada, Modelado Matemático y Ciencia de Datos',
@@ -58,9 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
       'research.r2_desc': 'Modelado de tiempos hasta el evento con censura en cohortes clínicas, inferencia sobre riesgos proporcionales y distribuciones paramétricas para identificar factores pronósticos.',
       'research.r3_title': 'Evaluación Cuantitativa de Sistemas de IA',
       'research.r3_desc': 'Diseño de métricas de desempeño, análisis de concordancia y control de incertidumbre en sistemas híbridos que combinan reglas determinísticas y grandes modelos de lenguaje (LLMs).',
-      'lab.title': 'Nota interactiva: Convergencia en Regresión Lineal',
-      'lab.subtitle': 'Simulación en vivo de Y = 1.5 + 2.2X + ε con banda de confianza al 95%.',
-      'lab.simulate_btn': 'Nueva muestra',
+      'lab.title': 'Nota interactiva: Dinámica e Intervención en Series de Tiempo',
+      'lab.subtitle': 'Proceso estocástico en tiempo real Y<sub>t</sub> = φY<sub>t−1</sub> + τ·I<sub>t</sub> + ε<sub>t</sub> con trayectoria contrafactual e intervalo al 95%.',
+      'lab.shock_btn': 'Pulso causal (τ)',
+      'lab.simulate_btn': 'Pausar',
+      'lab.resume_btn': 'Reanudar',
       'stack.heading': '04 // STACK TÉCNICO',
       'stack.title': 'Habilidades y Herramientas',
       'stack.c1_title': 'Computación Estadística (R)',
@@ -74,7 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
       'nav.research': 'Research',
       'nav.stack': 'Skills',
       'nav.contact': 'Contact',
+      'nav.dark': 'Dark',
+      'nav.light': 'Light',
       'sidebar.focus': 'Focus Areas',
+      'sidebar.f1': 'Causal Inference in Time Series',
+      'sidebar.f2': 'Statistical Inference',
+      'sidebar.f3': 'Machine Learning & DL',
+      'sidebar.f4': 'Survival Analysis',
+      'sidebar.f5': 'Multivariate Statistics',
+      'sidebar.f6': 'Modeling in R & Python',
       'hero.badge': 'Statistician · M.Sc. (c) in Statistics',
       'about.heading': '01 // ABOUT ME & EDUCATION',
       'about.title': 'Applied Statistics, Mathematical Modeling & Data Science',
@@ -105,9 +122,11 @@ document.addEventListener('DOMContentLoaded', () => {
       'research.r2_desc': 'Time-to-event modeling with censoring in clinical cohorts, proportional hazards inference, and parametric distributions to identify prognostic factors.',
       'research.r3_title': 'Quantitative Evaluation of AI Systems',
       'research.r3_desc': 'Performance metric design, agreement analysis, and uncertainty control in hybrid systems combining deterministic rules and Large Language Models (LLMs).',
-      'lab.title': 'Interactive Note: Linear Regression Convergence',
-      'lab.subtitle': 'Live simulation of Y = 1.5 + 2.2X + ε with 95% confidence band.',
-      'lab.simulate_btn': 'New sample',
+      'lab.title': 'Interactive Note: Time Series Dynamics & Causal Intervention',
+      'lab.subtitle': 'Real-time stochastic process Y<sub>t</sub> = φY<sub>t−1</sub> + τ·I<sub>t</sub> + ε<sub>t</sub> with counterfactual & 95% band.',
+      'lab.shock_btn': 'Causal pulse (τ)',
+      'lab.simulate_btn': 'Pause',
+      'lab.resume_btn': 'Resume',
       'stack.heading': '04 // TECH STACK',
       'stack.title': 'Skills & Tools',
       'stack.c1_title': 'Statistical Computing (R)',
@@ -120,6 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentLang = localStorage.getItem('ldh-lang') || 'es';
   const langToggleBtn = document.getElementById('lang-toggle');
   const langLabel = document.getElementById('lang-label');
+  let isPaused = false;
+
+  function updatePauseButtonLabel() {
+    const resimBtn = document.getElementById('resimulate-btn');
+    if (!resimBtn) return;
+    const key = isPaused ? 'lab.resume_btn' : 'lab.simulate_btn';
+    resimBtn.textContent = translations[currentLang][key];
+  }
 
   function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -128,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.innerHTML = translations[lang][key];
       }
     });
+    updatePauseButtonLabel();
     if (langLabel) langLabel.textContent = lang.toUpperCase();
     document.documentElement.lang = lang;
   }
@@ -159,19 +187,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* 4. MINIMALIST OLS REGRESSION PLOT */
-  const regCanvas = document.getElementById('regressionCanvas');
-  const nSlider = document.getElementById('sample-size-slider');
-  const noiseSlider = document.getElementById('noise-slider');
-  const nValEl = document.getElementById('sample-size-val');
-  const noiseValEl = document.getElementById('noise-val');
-  const resimBtn = document.getElementById('resimulate-btn');
-  const olsEstEl = document.getElementById('ols-estimates');
-  const r2ValEl = document.getElementById('r2-value');
+  /* 4. CONTINUOUSLY MOVING TIME SERIES WITH CAUSAL INTERVENTION & COUNTERFACTUAL */
+  const tsCanvas = document.getElementById('regressionCanvas');
+  const phiSlider = document.getElementById('sample-size-slider');
+  const sigmaSlider = document.getElementById('noise-slider');
+  const phiValEl = document.getElementById('sample-size-val');
+  const sigmaValEl = document.getElementById('noise-val');
+  const pauseBtn = document.getElementById('resimulate-btn');
+  const shockBtn = document.getElementById('shock-btn');
+  const ytValEl = document.getElementById('ols-estimates');
+  const tauValEl = document.getElementById('r2-value');
 
-  const TRUE_B0 = 1.5;
-  const TRUE_B1 = 2.2;
-  let simData = [];
+  const WINDOW_SIZE = 120;
+  const STEP_INTERVAL_MS = 95; // Smooth streaming speed
+  let seriesHistory = [];
+  let yObs = 0;
+  let yCf = 0; // Counterfactual (without intervention)
+  let activeShock = 0;
+  let lastStepTime = performance.now();
+  let scrollProgress = 0;
 
   function randn() {
     let u = 0, v = 0;
@@ -180,133 +214,246 @@ document.addEventListener('DOMContentLoaded', () => {
     return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
   }
 
-  function generateSample() {
-    if (!nSlider || !noiseSlider) return;
-    const n = parseInt(nSlider.value, 10);
-    const sigma = parseFloat(noiseSlider.value);
-    nValEl.textContent = n;
-    noiseValEl.textContent = sigma.toFixed(2);
-
-    simData = [];
-    for (let i = 0; i < n; i++) {
-      const x = (i + 0.5) / n * 4.0 + (Math.random() - 0.5) * 0.12;
-      const y = TRUE_B0 + TRUE_B1 * x + randn() * sigma;
-      simData.push({ x, y });
-    }
-    drawRegressionPlot();
+  function getParams() {
+    const phi = phiSlider ? parseFloat(phiSlider.value) : 0.82;
+    const sigma = sigmaSlider ? parseFloat(sigmaSlider.value) : 0.55;
+    if (phiValEl) phiValEl.textContent = phi.toFixed(2);
+    if (sigmaValEl) sigmaValEl.textContent = sigma.toFixed(2);
+    return { phi, sigma };
   }
 
-  function computeOLS(data) {
-    const n = data.length;
-    const meanX = data.reduce((s, d) => s + d.x, 0) / n;
-    const meanY = data.reduce((s, d) => s + d.y, 0) / n;
+  function advanceTimeSeries(isInitial = false) {
+    const { phi, sigma } = getParams();
+    const eps = randn() * sigma;
 
-    let sxx = 0, sxy = 0, syy = 0;
-    for (const d of data) {
-      const dx = d.x - meanX;
-      const dy = d.y - meanY;
-      sxx += dx * dx;
-      sxy += dx * dy;
-      syy += dy * dy;
+    // Counterfactual evolves purely by AR(1)
+    yCf = phi * yCf + eps;
+
+    // Observed series includes decaying causal impulse / level effect
+    yObs = phi * yObs + activeShock + eps;
+    activeShock *= 0.88; // Decay impulse smoothly
+    if (Math.abs(activeShock) < 0.01) activeShock = 0;
+
+    // Stationary/conditional 95% band width
+    const stationarySd = sigma / Math.sqrt(Math.max(0.08, 1 - phi * phi));
+    const ci95 = 1.96 * stationarySd * 0.65;
+
+    const isInterventionPoint = !isInitial && seriesHistory.length > 0 && seriesHistory._justShocked;
+    if (seriesHistory._justShocked) seriesHistory._justShocked = false;
+
+    seriesHistory.push({
+      yObs,
+      yCf,
+      ci: ci95,
+      shockMarker: isInterventionPoint
+    });
+
+    if (seriesHistory.length > WINDOW_SIZE + 2) {
+      seriesHistory.shift();
     }
 
-    const b1 = sxy / sxx;
-    const b0 = meanY - b1 * meanX;
-
-    let sse = 0;
-    for (const d of data) {
-      const pred = b0 + b1 * d.x;
-      sse += (d.y - pred) ** 2;
+    if (!isInitial && ytValEl && tauValEl) {
+      const causalEffect = yObs - yCf;
+      ytValEl.innerHTML = `Y<sub>t</sub> = ${yObs >= 0 ? '+' : ''}${yObs.toFixed(2)}`;
+      tauValEl.innerHTML = `τ̂<sub>t</sub> = ${causalEffect >= 0 ? '+' : ''}${causalEffect.toFixed(2)}`;
     }
-
-    const r2 = Math.max(0, 1 - sse / syy);
-    const s2 = sse / Math.max(1, n - 2);
-    return { b0, b1, r2, s2, meanX, sxx, n };
   }
 
-  function drawRegressionPlot() {
-    if (!regCanvas || simData.length === 0) return;
-    const ctx = regCanvas.getContext('2d');
-    const w = regCanvas.width;
-    const h = regCanvas.height;
+  // Initialize buffer
+  for (let i = 0; i < WINDOW_SIZE + 2; i++) {
+    advanceTimeSeries(true);
+  }
+
+  function drawTimeSeries(frac) {
+    if (!tsCanvas || seriesHistory.length < 4) return;
+    const ctx = tsCanvas.getContext('2d');
+    const w = tsCanvas.width;
+    const h = tsCanvas.height;
     const isDark = htmlEl.getAttribute('data-theme') === 'dark';
-
-    const stats = computeOLS(simData);
-    olsEstEl.textContent = `β̂₀ = ${stats.b0.toFixed(2)}, β̂₁ = ${stats.b1.toFixed(2)}`;
-    r2ValEl.textContent = `R² = ${stats.r2.toFixed(3)}`;
 
     ctx.clearRect(0, 0, w, h);
 
-    const padL = 32, padR = 16, padT = 14, padB = 24;
+    const padL = 34, padR = 14, padT = 14, padB = 22;
     const plotW = w - padL - padR;
     const plotH = h - padT - padB;
 
-    const xMin = -0.1, xMax = 4.1;
-    const yMin = -1.5, yMax = 12.5;
+    const yMin = -4.8, yMax = 4.8;
+    const toPxY = y => {
+      const clamped = Math.max(yMin, Math.min(yMax, y));
+      return padT + plotH - ((clamped - yMin) / (yMax - yMin)) * plotH;
+    };
 
-    const toPxX = x => padL + ((x - xMin) / (xMax - xMin)) * plotW;
-    const toPxY = y => padT + plotH - ((y - yMin) / (yMax - yMin)) * plotH;
+    const n = WINDOW_SIZE;
+    const toPxX = (idx) => padL + ((idx - frac) / (n - 1)) * plotW;
 
-    // Minimal Tufte axes
-    ctx.strokeStyle = isDark ? '#2e3136' : '#dcdcd6';
+    // Subtle horizontal zero baseline & Tufte bottom axis
+    const zeroY = toPxY(0);
+    ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
     ctx.lineWidth = 1;
+    ctx.setLineDash([3, 4]);
+    ctx.beginPath();
+    ctx.moveTo(padL, zeroY);
+    ctx.lineTo(padL + plotW, zeroY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.strokeStyle = isDark ? '#2e3136' : '#dcdcd6';
     ctx.beginPath();
     ctx.moveTo(padL, padT + plotH);
     ctx.lineTo(padL + plotW, padT + plotH);
     ctx.stroke();
 
-    // 95% Confidence Band
+    // Y-axis minimal labels (+3, 0, -3)
+    ctx.fillStyle = isDark ? '#6e6e6a' : '#8c8c84';
+    ctx.font = '10px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('+3', padL - 6, toPxY(3));
+    ctx.fillText('0', padL - 6, zeroY);
+    ctx.fillText('-3', padL - 6, toPxY(-3));
+
+    ctx.save();
     ctx.beginPath();
-    const steps = 50;
-    for (let i = 0; i <= steps; i++) {
-      const x = xMin + (i / steps) * (xMax - xMin);
-      const yHat = stats.b0 + stats.b1 * x;
-      const seMean = Math.sqrt(stats.s2 * (1 / stats.n + ((x - stats.meanX) ** 2) / stats.sxx));
-      const px = toPxX(x), py = toPxY(yHat + 1.96 * seMean);
+    ctx.rect(padL, padT, plotW, plotH);
+    ctx.clip();
+
+    // 1. 95% Credible / Confidence Interval Band around Counterfactual/Process
+    ctx.beginPath();
+    for (let i = 0; i < seriesHistory.length; i++) {
+      const pt = seriesHistory[i];
+      const px = toPxX(i);
+      const py = toPxY(pt.yCf + pt.ci);
       if (i === 0) ctx.moveTo(px, py);
       else ctx.lineTo(px, py);
     }
-    for (let i = steps; i >= 0; i--) {
-      const x = xMin + (i / steps) * (xMax - xMin);
-      const yHat = stats.b0 + stats.b1 * x;
-      const seMean = Math.sqrt(stats.s2 * (1 / stats.n + ((x - stats.meanX) ** 2) / stats.sxx));
-      ctx.lineTo(toPxX(x), toPxY(yHat - 1.96 * seMean));
+    for (let i = seriesHistory.length - 1; i >= 0; i--) {
+      const pt = seriesHistory[i];
+      const px = toPxX(i);
+      const py = toPxY(pt.yCf - pt.ci);
+      ctx.lineTo(px, py);
     }
     ctx.closePath();
-    ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.14)' : 'rgba(15, 76, 129, 0.11)';
+    ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.11)' : 'rgba(15, 76, 129, 0.08)';
     ctx.fill();
 
-    // True Line (dashed subtle)
+    // 2. Shaded Causal Effect Area between Observed and Counterfactual when diverged
+    ctx.beginPath();
+    for (let i = 0; i < seriesHistory.length; i++) {
+      const px = toPxX(i);
+      const py = toPxY(seriesHistory[i].yObs);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    for (let i = seriesHistory.length - 1; i >= 0; i--) {
+      const px = toPxX(i);
+      const py = toPxY(seriesHistory[i].yCf);
+      ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.18)' : 'rgba(15, 76, 129, 0.14)';
+    ctx.fill();
+
+    // 3. Vertical intervention markers (t₀)
+    for (let i = 0; i < seriesHistory.length; i++) {
+      if (seriesHistory[i].shockMarker) {
+        const sx = toPxX(i);
+        ctx.strokeStyle = isDark ? 'rgba(245, 158, 11, 0.65)' : 'rgba(180, 83, 9, 0.55)';
+        ctx.lineWidth = 1.1;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(sx, padT);
+        ctx.lineTo(sx, padT + plotH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = isDark ? '#fbbf24' : '#b45309';
+        ctx.font = '10px "JetBrains Mono", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText('t₀ (τ)', sx + 4, padT + 10);
+      }
+    }
+
+    // 4. Counterfactual Trajectory (Dashed)
     ctx.beginPath();
     ctx.setLineDash([4, 4]);
-    ctx.moveTo(toPxX(xMin), toPxY(TRUE_B0 + TRUE_B1 * xMin));
-    ctx.lineTo(toPxX(xMax), toPxY(TRUE_B0 + TRUE_B1 * xMax));
-    ctx.strokeStyle = isDark ? '#6e6e6a' : '#9a9a92';
-    ctx.lineWidth = 1.2;
+    for (let i = 0; i < seriesHistory.length; i++) {
+      const px = toPxX(i);
+      const py = toPxY(seriesHistory[i].yCf);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = isDark ? '#787872' : '#94948c';
+    ctx.lineWidth = 1.25;
     ctx.stroke();
     ctx.setLineDash([]);
 
-    // OLS Fitted Line
+    // 5. Observed Time Series Y_t (Solid Smooth Line)
     ctx.beginPath();
-    ctx.moveTo(toPxX(xMin), toPxY(stats.b0 + stats.b1 * xMin));
-    ctx.lineTo(toPxX(xMax), toPxY(stats.b0 + stats.b1 * xMax));
+    for (let i = 0; i < seriesHistory.length; i++) {
+      const px = toPxX(i);
+      const py = toPxY(seriesHistory[i].yObs);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
     ctx.strokeStyle = isDark ? '#60a5fa' : '#0f4c81';
-    ctx.lineWidth = 1.8;
+    ctx.lineWidth = 1.85;
     ctx.stroke();
 
-    // Data points
-    for (const d of simData) {
+    // Live leading pulse dot at the right edge
+    const lastIdx = seriesHistory.length - 2;
+    const nextIdx = seriesHistory.length - 1;
+    if (lastIdx >= 0) {
+      const interpY = seriesHistory[lastIdx].yObs * (1 - frac) + seriesHistory[nextIdx].yObs * frac;
+      const headX = toPxX(lastIdx + frac);
+      const headY = toPxY(interpY);
+
       ctx.beginPath();
-      ctx.arc(toPxX(d.x), toPxY(d.y), 2.8, 0, Math.PI * 2);
-      ctx.fillStyle = isDark ? '#d4d4d0' : '#2c2c2a';
+      ctx.arc(headX, headY, 3.2, 0, Math.PI * 2);
+      ctx.fillStyle = isDark ? '#60a5fa' : '#0f4c81';
       ctx.fill();
     }
+
+    ctx.restore();
   }
 
-  if (nSlider && noiseSlider && resimBtn) {
-    nSlider.addEventListener('input', generateSample);
-    noiseSlider.addEventListener('input', generateSample);
-    resimBtn.addEventListener('click', generateSample);
-    generateSample();
+  function animateLoop(now) {
+    if (!isPaused) {
+      const elapsed = now - lastStepTime;
+      if (elapsed >= STEP_INTERVAL_MS) {
+        advanceTimeSeries(false);
+        lastStepTime = now - (elapsed % STEP_INTERVAL_MS);
+      }
+      scrollProgress = (now - lastStepTime) / STEP_INTERVAL_MS;
+    }
+    drawTimeSeries(scrollProgress);
+    requestAnimationFrame(animateLoop);
   }
+
+  if (phiSlider) phiSlider.addEventListener('input', getParams);
+  if (sigmaSlider) sigmaSlider.addEventListener('input', getParams);
+
+  if (shockBtn) {
+    shockBtn.addEventListener('click', () => {
+      // Inject a clean positive or negative causal shock
+      const sign = yObs > 1.2 ? -1 : 1;
+      activeShock += sign * 2.1;
+      seriesHistory._justShocked = true;
+    });
+  }
+
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      isPaused = !isPaused;
+      lastStepTime = performance.now();
+      updatePauseButtonLabel();
+    });
+  }
+
+  // Trigger an initial subtle causal pulse after 1.5s so visitors immediately see the counterfactual comparison
+  setTimeout(() => {
+    activeShock = 1.85;
+    seriesHistory._justShocked = true;
+  }, 1200);
+
+  requestAnimationFrame(animateLoop);
 });
